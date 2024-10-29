@@ -10,23 +10,60 @@
             {{ $message }}
         </div>
     @endif
-    <div class="container d-flex">
-        <a href="{{ route('students.create') }}" class="btn btn-primary w-25 m-2 text-center">Добавить студента</a>
-    
-        <form action="{{ route('truncate.table.students') }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить все записи?');" class="w-25 m-2">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger w-100">Удалить все записи</button>
-        </form>
-        <form action="{{ route('seed.database.students') }}" method="POST" class="w-25 m-2">
-            @csrf
-            <button type="submit" class="btn btn-primary w-100">Запустить сидеры</button>
-        </form>
-        <a href="{{ route('export.students') }}" class="btn btn-primary w-25 m-2 text-center">Эскпорт в Excel</a>
+    @if ($error = Session::get('error'))
+        <div class="alert alert-danger mt-2">
+            {{ $error }}
+        </div>
+    @endif
+    <div class="container">
 
+        <div class="d-flex flex-row">
+            
+            <form action="{{ route('students.create') }}" method="GET" class="w-50 m-2">
+                @csrf
+                <button type="submit" class="btn btn-success w-100">Добавить студента</button>
+            </form>
+            <form action="{{ route('truncate.table.students') }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить все записи?');" class="w-25 m-2">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger w-100">Удалить все записи</button>
+            </form>
+            <form action="{{ route('seed.database.students') }}" method="POST" class="w-25 m-2">
+                @csrf
+                <button type="submit" class="btn btn-primary w-100">Запустить сидеры</button>
+            </form>
+        </div>
+        <div class="d-flex flex-row">
+            <form action="{{ route('export.students') }}" method="GET" class="w-25 m-2">
+                @csrf
+                <button type="submit" class="btn btn-primary w-100">Эскпорт в Excel</button>
+            </form>
+            
+            <form action="{{ route('report') }}" method="GET" class="w-25 m-2">
+                @csrf
+                <button type="submit" class="btn btn-primary w-100">Экспорт в Word</button>
+            </form>
+            <form action="{{ route('report2') }}" method="GET" class="w-25 m-2">
+                @csrf
+                <button type="submit" class="btn btn-primary w-100">Экспорт в Word 2</button>
+            </form>
+            <form action="{{ route('generate.statement') }}" method="POST" class="w-50">
+                @csrf
+                <div class="d-flex">
+                    <select name="student_id" class="btn btn-success w-100 m-2" required>
+                        <option value="">Выберите студента</option>
+                        @foreach($students as $student)
+                        <option value="{{ $student->id }}">{{ $student->first_name }} {{ $student->last_name }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="btn btn-success w-100 m-2">Создать документ</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <table class="table mt-4">
-        <thead>
+        
+        <table class="table mt-4">
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Имя</th>

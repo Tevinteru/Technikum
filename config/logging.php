@@ -51,13 +51,22 @@ return [
     */
 
     'channels' => [
-
+        'pail' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/Gololobov.log'),
+            'level' => 'debug',
+            'days' => env('LOG_DAILY_DAYS', 14),
+        ],
+        // 'stack' => [
+        //     'driver' => 'stack',
+        //     'channels' => explode(',', env('LOG_STACK', 'single')),
+        //     'ignore_exceptions' => false,
+        // ],
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => ['daily', 'pail'],
             'ignore_exceptions' => false,
         ],
-
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

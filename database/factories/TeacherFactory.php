@@ -12,15 +12,15 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'middle_name' => $this->faker->firstName,
-            'birth_date' => $this->faker->date,
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'middle_name' => $this->faker->firstName(),
+            'birth_date' => $this->faker->date(),
             'subject' => $this->faker->randomElement(['Математика', 'Физика', 'Химия', 'Биология', 'Информатика']),
             'education' => $this->faker->randomElement(['Высшее', 'Среднее специальное']),
             'experience' => $this->faker->numberBetween(1, 40),
-            'phone' => $this->faker->phoneNumber,
-            'email' => $this->faker->unique()->safeEmail,
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->unique()->safeEmail(),
         ];
     }
 }

@@ -24,6 +24,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('teachers.index') }}">Преподаватели</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('students.index') }}">Студенты</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('excel.form') }}">Excel</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('download.today.logs') }}">Скачать логи за сегодня</a></li>
+
                 </ul>
             </div>
         </div>

@@ -5,6 +5,9 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\DatabaseController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\LogController;
 
 Route::resource('teachers', TeacherController::class);
 Route::resource('students', StudentController::class);
@@ -22,6 +25,13 @@ Route::get('/excel-form', [ExcelController::class, 'showForm'])->name('excel.for
 Route::post('/excel-form', [ExcelController::class, 'handleForm']);
 Route::get('/download-excel', [ExcelController::class, 'downloadExcel']);
 
+Route::get('/generate-statement/{student}', [DocumentController::class, 'generateStatement']);
+Route::post('/generate-statement', [DocumentController::class, 'generateStatement'])->name('generate.statement');
+Route::get('/download-report', [ReportController::class, 'generateReport'])->name('report');
+Route::get('/download-report2', [ReportController::class, 'generateReport2'])->name('report2');
+
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+
+Route::get('/download-today-logs', [LogController::class, 'downloadTodayLogs'])->name('download.today.logs');
